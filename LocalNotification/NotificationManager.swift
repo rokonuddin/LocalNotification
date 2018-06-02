@@ -41,6 +41,24 @@ class NotificationManager {
         }
     }
     
+    func sendLocalPush(on date: Date, id: String)  {
+        let content = UNMutableNotificationContent()
+        content.title = NSString.localizedUserNotificationString(forKey: "Wake up Men!", arguments: nil)
+        content.body = NSString.localizedUserNotificationString(forKey: "It's for " + id + " seconds", arguments: nil)
+        let  calendar = Calendar(identifier: .gregorian)
+        let components = calendar.dateComponents([.year,.day,.month,.hour,.minute,.second], from: date)
+        print(components)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: "timer" + id, content: content, trigger: trigger)
+        
+        center.add(request) { (error) in
+            if error == nil {
+                print("Schedule push succeed")
+            }
+        }
+    }
+    
     func removeNotificationWithIdentifiers(_ identifiers: [String]) {
 //        UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
 //            var identifiers: [String] = []

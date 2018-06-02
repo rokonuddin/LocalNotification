@@ -8,12 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class TimeIntervalViewController: UIViewController {
 
     @IBOutlet weak var secondTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = "Time Interval Notification"
         NotificationManager.shared.requestAuthorization()
     }
 
